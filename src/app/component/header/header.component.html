@@ -1,0 +1,257 @@
+<!-- Humberger Begin -->
+<div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+  <div class="humberger__menu__logo">
+    <a href="#"><img src="img/logo.png" alt=""></a>
+  </div>
+  <div class="humberger__menu__cart">
+    <ul>
+      <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+      <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+    </ul>
+    <div class="header__cart__price">item: <span>$150.00</span></div>
+  </div>
+  <div class="humberger__menu__widget">
+    <div class="header__top__right__language">
+      <img src="img/language.png" alt="">
+      <div>English</div>
+      <span class="arrow_carrot-down"></span>
+      <ul>
+        <li><a href="#">Spanis</a></li>
+        <li><a href="#">English</a></li>
+      </ul>
+    </div>
+    <div class="header__top__right__auth">
+      <a routerLink="/home/login" *ngIf="!this.isLoggedIn"><i class="fa fa-user"></i> Đăng Nhập</a>
+    </div>
+  </div>
+  <nav class="humberger__menu__nav mobile-menu">
+    <ul>
+      <li class="active"><a href="./index.html">Home</a></li>
+      <li><a href="./shop-grid.html">Shop</a></li>
+      <li><a href="#">Pages</a>
+        <ul class="header__menu__dropdown">
+          <li><a href="./shop-details.html">Shop Details</a></li>
+          <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+          <li><a href="./checkout.html">Check Out</a></li>
+          <li><a href="./blog-details.html">Blog Details</a></li>
+        </ul>
+      </li>
+      <li><a href="./blog.html">Blog</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="mobile-menu-wrap"></div>
+  <div class="header__top__right__social">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-pinterest-p"></i></a>
+  </div>
+  <div class="humberger__menu__contact">
+    <ul>
+      <li><i class="fa fa-envelope"></i> lenhan@gmail.com</li>
+      <li>Miễn phí giao hàng cho đơn hàng trên 200k</li>
+    </ul>
+  </div>
+</div>
+<!-- Humberger End -->
+
+<!-- Header Section Begin -->
+<header class="header">
+  <div class="header__top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="header__top__left">
+            <ul>
+              <li><i class="fa fa-envelope"></i> lenhan@gmail.com</li>
+              <li>Miễn phí giao hàng cho đơn hàng trên 200k</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="header__top__right">
+<!--            <div class="header__top__right__social">-->
+<!--              <a href="#"><i class="fa fa-facebook"></i></a>-->
+<!--              <a href="#"><i class="fa fa-twitter"></i></a>-->
+<!--              <a href="#"><i class="fa fa-linkedin"></i></a>-->
+<!--              <a href="#"><i class="fa fa-pinterest-p"></i></a>-->
+<!--            </div>-->
+            <div class="header__top__right__language" *ngIf="this.isLoggedIn">
+              <img src="img/language.png" alt="">
+              <div>{{this.email}}</div>
+              <!--              <span class="arrow_carrot-down"></span>-->
+              <!--              <ul>-->
+              <!--                <li><a href="#">Spanis</a></li>-->
+              <!--                <li><a href="#">English</a></li>-->
+              <!--              </ul>-->
+            </div>
+            <div class="header__top__right__language" *ngIf="showAdminBoard">
+              <img src="img/language.png" alt="">
+              <a routerLink="/home-admin"><i class="fa fa-user"></i> Trang quản trị </a>
+            </div>
+            <div class="header__top__right__language" *ngIf="!this.isLoggedIn">
+              <img src="img/language.png" alt="">
+              <a routerLink="/home/register" ><i class="fa fa-registered"></i> Đăng ký</a>
+            </div>
+            <div class="header__top__right__auth">
+              <a routerLink="/home/login" *ngIf="!this.isLoggedIn"><i class="fa fa-user"></i> Đăng nhập</a>
+              <a *ngIf="this.isLoggedIn" href="#" (click)="onLogOut()"><i class="fa fa-sign-out"></i>  Đăng xuất </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="header__logo">
+          <a href="./index.html"><img src="img/logo.png" alt=""></a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <nav class="header__menu">
+          <ul>
+            <li style="padding-left:8rem ;"><a routerLink="/home/main">Trang chủ</a></li>
+            <li><a routerLink="/home/product-list">Cửa hàng</a></li>
+            <li><a routerLink="/home/news-list">Tin tức</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-lg-3">
+        <div class="header__cart">
+          <ul>
+<!--            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>-->
+            <li><a routerLink="/home/shopping-cart"><i class="fa fa-shopping-bag"></i> <span>{{ totalItem }}</span></a></li>
+          </ul>
+          <div class="header__cart__price">Số tiền: <span>{{ totalAmount | currency: 'VND':'' }}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="humberger__open">
+      <i class="fa fa-bars"></i>
+    </div>
+  </div>
+</header>
+<!-- Header Section End -->
+
+<!--<header class="section-header">-->
+
+<!--  <nav class="navbar d-none d-md-flex p-md-0 navbar-expand-sm navbar-light border-bottom">-->
+<!--    <div class="container">-->
+<!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
+<!--      <div class="collapse navbar-collapse" id="navbarTop4">-->
+<!--        <ul class="navbar-nav mr-auto">-->
+<!--          <li><span class="nav-link">Xin chào, <a routerLink="/home/login" *ngIf="!this.isLoggedIn"> Đăng Nhập </a> {{this.isLoggedIn ? this.email : 'or' }} <a routerLink="/home/register" *ngIf="!this.isLoggedIn"> Đăng ký </a></span></li>-->
+<!--          <li><a routerLink="/home/product-list" [queryParams]="{type: 'sale'}" class="nav-link"> Giảm giá </a></li>-->
+<!--          <li><a routerLink="/home/news-list" class="nav-link"> Tin Tức </a></li>-->
+<!--        </ul>-->
+<!--        <ul class="navbar-nav">-->
+<!--          <li><a class="nav-item"><img src="../assets/images/icons/flags/vietnam.png" height="16"></a></li>-->
+<!--          <li><a routerLink="/home-admin" class="nav-link" *ngIf="showAdminBoard"> Trang quản trị </a></li>-->
+<!--&lt;!&ndash;          <li><a routerLink="/home/product-list" class="nav-link"> Cửa hàng </a></li>&ndash;&gt;-->
+<!--          <li><a *ngIf="this.isLoggedIn" class="nav-link" href="#" (click)="onLogOut()"> Đăng xuất </a></li>-->
+<!--          <li><a routerLink="/home/shopping-cart" class="nav-link"> <i class="fa fa-shopping-cart"></i> </a></li>-->
+<!--        </ul> &lt;!&ndash; list-inline //  &ndash;&gt;-->
+<!--      </div> &lt;!&ndash; navbar-collapse .// &ndash;&gt;-->
+<!--    </div> &lt;!&ndash; container //  &ndash;&gt;-->
+<!--  </nav>-->
+
+<!--  <div class="container">-->
+<!--    <section class="header-main border-bottom">-->
+<!--      <div class="row row-sm">-->
+<!--        <div class="col-6 col-sm col-md col-lg  flex-grow-0">-->
+<!--          <a routerLink="/home/main" class="brand-wrap">-->
+<!--            <img class="logo" src="../assets/images/logo.png">-->
+<!--          </a> &lt;!&ndash; brand-wrap.// &ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="col-6 col-sm col-md col-lg flex-md-grow-0">-->
+
+<!--          &lt;!&ndash; mobile-only &ndash;&gt;-->
+<!--          <div class="d-md-none float-right">-->
+<!--            <a href="#" class="btn btn-light"> <i class="fa fa-bell"></i> </a>-->
+<!--            <a href="#" class="btn btn-light"> <i class="fa fa-user"></i> </a>-->
+<!--            <a href="#" class="btn btn-light"> <i class="fa fa-shopping-cart"></i> 2 </a>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; mobile-only //end  &ndash;&gt;-->
+<!--        </div> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--        <div class="col-lg-6 col-xl col-md-5 col-sm-12 flex-grow-1">-->
+<!--          <form action="#" class="search-header"  [formGroup]="searchForm">-->
+<!--            <div class="input-group">-->
+<!--              <input type="text" class="form-control" placeholder="Tìm kiếm" formControlName="name">-->
+<!--            </div>-->
+<!--          </form> &lt;!&ndash; search-wrap .end// &ndash;&gt;-->
+<!--        </div> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--        <div class="col col-lg-2 col-md flex-grow-0 ">-->
+<!--          <button class="btn btn-block btn-primary" type="submit" (click)="search()"> Tìm kiếm </button>-->
+<!--        </div>-->
+<!--      </div> &lt;!&ndash; row.// &ndash;&gt;-->
+<!--    </section> &lt;!&ndash; header-main .// &ndash;&gt;-->
+
+
+<!--    <nav class="navbar navbar-main navbar-expand pl-0">-->
+<!--      <ul class="navbar-nav flex-wrap">-->
+<!--        <li class="nav-item">-->
+<!--          <a style="color:black" class="nav-link" routerLink="/home/main">TRANG CHỦ</a>-->
+<!--        </li>-->
+<!--&lt;!&ndash;        <li class="nav-item dropdown">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Demo pages </a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="dropdown-menu dropdown-large">&ndash;&gt;-->
+<!--&lt;!&ndash;            <nav class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-index-1.html">Home page 1</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-index-2.html">Home page 2</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-category.html">All category</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-listing-large.html">Listing list</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-listing-grid.html">Listing grid</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-shopping-cart.html">Shopping cart</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-detail-product.html">Product detail</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-content.html">Page content</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-user-login.html">Page login</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-user-register.html">Page register</a>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-profile-main.html">Profile main</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-profile-orders.html">Profile orders</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-profile-seller.html">Profile seller</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-profile-wishlist.html">Profile wishlist</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-profile-setting.html">Profile setting</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-profile-address.html">Profile address</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="page-components.html" target="_blank">More components</a>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </nav> &lt;!&ndash;  row end .// &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;          </div> &lt;!&ndash;  dropdown-menu dropdown-large end.// &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+<!--        <li class="nav-item" *ngFor="let category of categories">-->
+<!--          <a style="color:black" class="nav-link" routerLink="/home/product-list/{{category.id}}">{{ category.categoryName | uppercase}}</a>-->
+<!--        </li>-->
+<!--&lt;!&ndash;        <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-link" href="#">Fashion</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-link" href="#">Beauty</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-link" href="#">Motors</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-link" href="#">Sports</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-link" href="#">Gardening</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-link" href="#">Deals</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-link" href="#">Under $10</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </li>&ndash;&gt;-->
+<!--      </ul>-->
+<!--    </nav> &lt;!&ndash; navbar-main  .// &ndash;&gt;-->
+
+<!--  </div> &lt;!&ndash; container.// &ndash;&gt;-->
+<!--</header> &lt;!&ndash; section-header.// &ndash;&gt;-->

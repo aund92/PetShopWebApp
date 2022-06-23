@@ -1,0 +1,139 @@
+<div class="border-end bg-white" id="sidebar-wrapper">
+  <div class="sidebar-heading border-bottom bg-light">Quản Lý Cửa Hàng</div>
+  <div class="list-group list-group-flush">
+    <a routerLink="/home-admin/main-admin" class="list-group-item list-group-item-action list-group-item-light p-3">Trang
+      Chủ</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/list-user"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Người dùng</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/list-category"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Danh mục sản phẩm</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/material"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Nguyên liệu</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/kpi"
+       class="list-group-item list-group-item-action list-group-item-light p-3">KPI</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/list-product"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Sản phẩm</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/list-thoroughbred"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Size</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/list-category-news"
+       class="list-group-item list-group-item-action list-group-item-light p-3"
+    >Danh mục tin tức</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/list-news"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Tin tức</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/order"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Đơn hàng</a>
+    <a *ngIf="showAdminBoard" routerLink="/home-admin/income"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Thu nhập</a>
+    <a *ngIf="showAdminBoard" routerLink="/home/main"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Cửa Hàng</a>
+    <a *ngIf="showAdminBoard" (click)="onLogOut()" style="cursor: pointer"
+       class="list-group-item list-group-item-action list-group-item-light p-3">Đăng xuất</a>
+  </div>
+</div>
+
+<!--<nav class="navbar navbar-expand navbar-dark bg-dark">-->
+<!--  <div class="container">-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_top" aria-expanded="false"-->
+<!--            aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+
+<!--    <div class="collapse navbar-collapse" id="navbar_top">-->
+<!--      <ul class="navbar-nav mr-md-auto">-->
+<!--        <li><a routerLink="/home-admin/main-admin" class="nav-link">Trang Chủ</a></li>-->
+<!--        <li *ngIf="showAdminBoard"><a routerLink="/home-admin/list-user" class="nav-link"> Người dùng </a></li>-->
+<!--        &lt;!&ndash;        <li><a href="#" class="nav-link"> Menu item </a></li>&ndash;&gt;-->
+<!--        <li *ngIf="showAdminBoard"><a routerLink="/home-admin/list-category" class="nav-link"> Danh mục sản phẩm </a>-->
+<!--        </li>-->
+<!--        <li *ngIf="showAdminBoard"><a routerLink="/home-admin/list-product" class="nav-link"> Sản phẩm </a></li>-->
+<!--        <li *ngIf="showAdminBoard"><a routerLink="/home-admin/list-thoroughbred" class="nav-link"> Độ thuần chủng </a>-->
+<!--        </li>-->
+<!--        <li *ngIf="showAdminBoard"><a routerLink="/home-admin/list-category-news" class="nav-link"> Danh mục tin-->
+<!--          tức </a></li>-->
+<!--        <li *ngIf="showAdminBoard"><a routerLink="/home-admin/list-news" class="nav-link"> Tin tức </a></li>-->
+<!--        <li *ngIf="showAdminBoard"><a routerLink="/home-admin/order" class="nav-link"> Đơn hàng </a></li>-->
+<!--      </ul>-->
+<!--      <ul class="navbar-nav">-->
+<!--        <li class="nav-item"><a routerLink="/home/main" class="nav-link"> Cửa Hàng </a></li>-->
+<!--        <li class="nav-item"><a (click)="onLogOut()" style="cursor: pointer" class="nav-link"> Đăng xuất </a></li>-->
+
+<!--        &lt;!&ndash;        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> USD </a>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <ul class="dropdown-menu dropdown-menu-right">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li><a class="dropdown-item" href="#">EUR</a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li><a class="dropdown-item" href="#">AED</a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li><a class="dropdown-item" href="#">RUBL </a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </ul>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </li>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <li class="nav-item dropdown"><a  class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">   Language </a>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <ul class="dropdown-menu dropdown-menu-right">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li><a class="dropdown-item" href="#">English</a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li><a class="dropdown-item" href="#">Arabic</a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li><a class="dropdown-item" href="#">Russian </a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </ul>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </li>&ndash;&gt;-->
+<!--      </ul> &lt;!&ndash; navbar-nav.// &ndash;&gt;-->
+<!--    </div> &lt;!&ndash; collapse.// &ndash;&gt;-->
+<!--  </div>-->
+<!--</nav>-->
+
+<!--<ul class="row nav flex-column bg-light mh-100">-->
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/list-user"><i class="bi bi-people-fill"></i> Quản lý người dùng</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/add-category"><i class="bi bi-bookmark-plus-fill"></i> Danh mục sản phẩm</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/list-category"><i class="bi bi-bookmarks-fill"></i> Xem danh mục sản phẩm</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/add-thoroughbred"><i class="bi bi-bookmark-plus-fill"></i> Tạo độ thuần chủng</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/list-thoroughbred"><i class="bi bi-border-width"></i> Xem độ thuần chủng</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/add-category-news"><i class="bi bi-book-fill"></i> Danh mục tin tức</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/list-category-news"><i class="bi bi-card-text"></i> Xem danh mục tin tức</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/add-news"><i class="bi bi-newspaper"></i> Thêm tin tức</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/list-news"><i class="bi bi-list-nested"></i> Xem tin tức</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/add-product"><i class="bi bi-node-plus-fill"></i> Thêm sản phẩm</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/list-product"><i class="bi bi-card-checklist"></i> Xem sản phẩm</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/add-discount-code"><i class="bi bi-upc-scan"></i> Tạo mã giảm giá</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/list-discount-code"><i class="bi bi-view-list"></i> Xem mã giảm giá</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/add-shipping-fee"><i class="bi bi-truck"></i> Phí vận chuyển</a>-->
+<!--    </li>-->
+
+<!--    <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--        <a class="nav-link" routerLink="/home-admin/list-shipping-fee"><i class="bi bi-basket3-fill"></i> Xem phí vận chuyển</a>-->
+<!--    </li>-->
+<!--</ul>-->

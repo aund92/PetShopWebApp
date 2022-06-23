@@ -1,0 +1,431 @@
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" style="background-image: url('../assets/new/img/breadcrumb.jpg');" data-setbg="img/breadcrumb.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>{{this.productDTO.category?.categoryName}}</h2>
+          <div class="breadcrumb__option">
+            <a href="./index.html">Trang chủ</a>
+            <a href="./index.html">{{this.productDTO.category?.categoryName}}</a>
+            <span>{{this.productDTO?.productName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__pic">
+          <div class="product__details__pic__item">
+            <img class="product__details__pic__item--large"
+                 *ngIf="productDTO && productDTO?.productImages?.length > 0" [src]="productDTO.productImages[0].image" alt="">
+          </div>
+<!--          <div class="product__details__pic__slider owl-carousel">-->
+<!--            <img data-imgbigurl="img/product/details/product-details-2.jpg"-->
+<!--                 src="img/product/details/thumb-1.jpg" alt="">-->
+<!--            <img data-imgbigurl="img/product/details/product-details-3.jpg"-->
+<!--                 src="img/product/details/thumb-2.jpg" alt="">-->
+<!--            <img data-imgbigurl="img/product/details/product-details-5.jpg"-->
+<!--                 src="img/product/details/thumb-3.jpg" alt="">-->
+<!--            <img data-imgbigurl="img/product/details/product-details-4.jpg"-->
+<!--                 src="img/product/details/thumb-4.jpg" alt="">-->
+<!--          </div>-->
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__text">
+          <h3>{{this.productDTO?.productName}}</h3>
+          <!-- <div class="product__details__rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+          </div> -->
+          <div *ngIf="!(productDTO.sale && productDTO.sale > 0 && productDTO?.priceSell)" class="product__details__price">{{ productDTO?.priceSell | currency: 'VND':'' }}đ</div>
+          <div *ngIf="productDTO.sale && productDTO.sale > 0 && productDTO?.priceSell" class="product__details__price">{{ productDTO.priceSell - (productDTO.priceSell * (productDTO.sale / 100)) | currency: 'VND':''}}đ</div>
+          <div class="product__details__quantity">
+            <div class="quantity">
+              <div class="pro-qty">
+                <input type="number" value="1" [(ngModel)]="quantity">
+              </div>
+            </div>
+          </div>
+          <a  class="primary-btn" (click)="addToCart(this.productDTO)">THÊM VÀO GIỎ</a>
+<!--          <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>-->
+          <ul>
+            <li><b>Thể loại: </b> <span>{{this.productDTO.category.categoryName}}</span></li>
+            <li><b>Giao hàng: </b> <samp>1 ngày giao hàng.</samp></li>
+            <li><b>Số lượng trong kho: </b> <span>{{this.productDTO.inventory}}</span></li>
+            <li><b>Share on</b>
+              <div class="share">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-pinterest"></i></a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="product__details__tab">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                 aria-selected="true">Mô tả</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+              <div class="product__details__tab__desc">
+                <h6>Thông tin sản phẩm</h6>
+                {{ productDTO.introduce }}
+              </div>
+            </div>
+            <!-- <div class="tab-pane" id="tabs-2" role="tabpanel">
+              <div class="product__details__tab__desc">
+                <h6>Products Infomation</h6>
+                <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                  Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
+                  Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
+                  sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
+                  eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
+                  Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
+                  sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
+                  diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
+                  ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                  Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                  Proin eget tortor risus.</p>
+                <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                  ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
+                  elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
+                  porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
+                  nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+              </div>
+            </div> -->
+            <!-- <div class="tab-pane" id="tabs-3" role="tabpanel">
+              <div class="product__details__tab__desc">
+                <h6>Products Infomation</h6>
+                <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                  Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
+                  Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
+                  sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
+                  eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
+                  Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
+                  sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
+                  diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
+                  ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                  Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                  Proin eget tortor risus.</p>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Product Details Section End -->
+
+<!-- Related Product Section Begin -->
+<section class="related-product">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title related__product__title">
+          <h2>Sản phẩm liên quan</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <ng-container *ngFor="let product of productRelates; let i = index">
+        <div class="col-lg-3 col-md-4 col-sm-6" *ngIf="i <= 3">
+          <div class="product__item">
+            <div class="product__item__pic set-bg" [style.background-image]="'url(' + product.image + ')'" style="border-radius: 10px;" data-setbg="img/product/product-1.jpg">
+              <ul class="product__item__pic__hover">
+                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+              </ul>
+            </div>
+            <div class="product__item__text">
+              <h6><a routerLink="/home/product-detail/{{product.id}}">{{product.productName}}</a></h6>
+              <h5>{{ product.priceSell! - (product.priceSell! * (product.sale! / 100)) | currency: 'VND':''}}đ</h5>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+<!--      <div class="col-lg-3 col-md-4 col-sm-6">-->
+<!--        <div class="product__item">-->
+<!--          <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">-->
+<!--            <ul class="product__item__pic__hover">-->
+<!--              <li><a href="#"><i class="fa fa-heart"></i></a></li>-->
+<!--              <li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
+<!--              <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="product__item__text">-->
+<!--            <h6><a href="#">Crab Pool Security</a></h6>-->
+<!--            <h5>$30.00</h5>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-3 col-md-4 col-sm-6">-->
+<!--        <div class="product__item">-->
+<!--          <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">-->
+<!--            <ul class="product__item__pic__hover">-->
+<!--              <li><a href="#"><i class="fa fa-heart"></i></a></li>-->
+<!--              <li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
+<!--              <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="product__item__text">-->
+<!--            <h6><a href="#">Crab Pool Security</a></h6>-->
+<!--            <h5>$30.00</h5>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-3 col-md-4 col-sm-6">-->
+<!--        <div class="product__item">-->
+<!--          <div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">-->
+<!--            <ul class="product__item__pic__hover">-->
+<!--              <li><a href="#"><i class="fa fa-heart"></i></a></li>-->
+<!--              <li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
+<!--              <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="product__item__text">-->
+<!--            <h6><a href="#">Crab Pool Security</a></h6>-->
+<!--            <h5>$30.00</h5>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+  </div>
+</section>
+<!-- Related Product Section End -->
+
+
+<!--<section class="py-3 bg-light">-->
+<!--  <div class="container">-->
+<!--    <ol class="breadcrumb">-->
+<!--      <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>-->
+<!--&lt;!&ndash;      <li class="breadcrumb-item"><a href="#">{{this.productDTO.category.categoryName}}</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li class="breadcrumb-item"><a href="#">Sub category</a></li>&ndash;&gt;-->
+<!--      <li class="breadcrumb-item active" aria-current="page">{{this.productDTO.category?.categoryName}}</li>-->
+<!--    </ol>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!--&lt;!&ndash; ========================= SECTION CONTENT ========================= &ndash;&gt;-->
+<!--<section class="section-content bg-white padding-y">-->
+<!--  <div class="container">-->
+
+<!--    &lt;!&ndash; ============================ ITEM DETAIL ======================== &ndash;&gt;-->
+<!--    <div class="row">-->
+<!--      <aside class="col-md-6">-->
+<!--        <div class="card">-->
+<!--          <article class="gallery-wrap">-->
+<!--            <div class="img-big-wrap">-->
+<!--              <div> <a ><img *ngIf="productDTO && productDTO?.productImages?.length > 0" [src]="productDTO.productImages[0].image" ></a></div>-->
+<!--            </div> &lt;!&ndash; slider-product.// &ndash;&gt;-->
+<!--          </article> &lt;!&ndash; gallery-wrap .end// &ndash;&gt;-->
+<!--        </div> &lt;!&ndash; card.// &ndash;&gt;-->
+<!--      </aside>-->
+<!--      <main class="col-md-6">-->
+<!--        <article class="product-info-aside">-->
+
+<!--          <h2 class="title mt-3">{{this.productDTO?.productName}} </h2>-->
+
+<!--          <div class="rating-wrap my-3">-->
+<!--&lt;!&ndash;            <ul class="rating-stars">&ndash;&gt;-->
+<!--&lt;!&ndash;              <li style="width:80%" class="stars-active">&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-star"></i> <i class="fa fa-star"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-star"></i> <i class="fa fa-star"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-star"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;              </li>&ndash;&gt;-->
+<!--&lt;!&ndash;              <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-star"></i> <i class="fa fa-star"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-star"></i> <i class="fa fa-star"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-star"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;              </li>&ndash;&gt;-->
+<!--&lt;!&ndash;            </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;            <small class="label-rating text-muted">132 reviews</small>&ndash;&gt;-->
+<!--&lt;!&ndash;            <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 orders </small>&ndash;&gt;-->
+<!--          </div> &lt;!&ndash; rating-wrap.// &ndash;&gt;-->
+
+<!--          <div class="mb-3">-->
+<!--            <var class="price h4"  *ngIf="!(productDTO.sale && productDTO.sale > 0 && productDTO?.priceSell)">{{ productDTO?.priceSell | currency: 'VND':'' }}đ</var>-->
+<!--            <var class="price h4" *ngIf="productDTO.sale && productDTO.sale > 0 && productDTO?.priceSell">{{ productDTO.priceSell - (productDTO.priceSell * (productDTO.sale / 100)) | currency: 'VND':''}}đ</var>-->
+<!--&lt;!&ndash;            <span class="text-muted">USD 562.65 incl. VAT</span>&ndash;&gt;-->
+<!--          </div> &lt;!&ndash; price-detail-wrap .// &ndash;&gt;-->
+
+<!--          <p>{{ productDTO.introduce }}</p>-->
+
+
+<!--          <dl class="row">-->
+<!--            <dt class="col-sm-3">Độ Thuần Chủng</dt>-->
+<!--            <dd class="col-sm-9"><a href="#">{{ productDTO.thoroughbred?.purebredLevel }}%</a></dd>-->
+
+<!--            <dt class="col-sm-3">Loại</dt>-->
+<!--            <dd class="col-sm-9">{{this.productDTO.category.categoryName}}</dd>-->
+
+<!--&lt;!&ndash;            <dt class="col-sm-3">Guarantee</dt>&ndash;&gt;-->
+<!--&lt;!&ndash;            <dd class="col-sm-9">2 year</dd>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <dt class="col-sm-3">Delivery time</dt>&ndash;&gt;-->
+<!--&lt;!&ndash;            <dd class="col-sm-9">3-4 days</dd>&ndash;&gt;-->
+
+<!--            <dt class="col-sm-3">Số Lượng </dt>-->
+<!--            <dd class="col-sm-9">{{this.productDTO.inventory}}</dd>-->
+<!--          </dl>-->
+
+<!--          <div class="form-row  mt-4">-->
+<!--            <div class="form-group col-md flex-grow-0">-->
+<!--              <div class="input-group mb-3 input-spinner">-->
+<!--                <div class="input-group-prepend">-->
+<!--                  <button class="btn btn-light" type="button" id="button-plus" (click)="onPlus()"> + </button>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" [(ngModel)]="quantity">-->
+<!--                <div class="input-group-append">-->
+<!--                  <button class="btn btn-light" type="button" id="button-minus" (click)="onMinus()"> &minus; </button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--            <div class="form-group col-md">-->
+<!--              <a class="btn btn-primary" (click)="addToCart(this.productDTO)">-->
+<!--                <i class="fas fa-shopping-cart"></i> <span class="text">Thêm vào giỏ</span>-->
+<!--              </a>-->
+<!--&lt;!&ndash;              <a href="#" class="btn btn-light">&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fas fa-envelope"></i> <span class="text">Contact supplier</span>&ndash;&gt;-->
+<!--&lt;!&ndash;              </a>&ndash;&gt;-->
+<!--            </div> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--          </div> &lt;!&ndash; row.// &ndash;&gt;-->
+
+<!--        </article> &lt;!&ndash; product-info-aside .// &ndash;&gt;-->
+<!--      </main> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--    </div> &lt;!&ndash; row.// &ndash;&gt;-->
+
+<!--    &lt;!&ndash; ================ ITEM DETAIL END .// ================= &ndash;&gt;-->
+
+
+<!--  </div> &lt;!&ndash; container .//  &ndash;&gt;-->
+<!--</section>-->
+<!--&lt;!&ndash; ========================= SECTION CONTENT END// ========================= &ndash;&gt;-->
+
+<!--&lt;!&ndash; ========================= SECTION  ========================= &ndash;&gt;-->
+<!--<section class="section-name padding-y bg">-->
+<!--  <div class="container">-->
+
+<!--    <div class="row">-->
+<!--      <div class="col-md-8">-->
+<!--        <h5 class="title-description">Mô tả</h5>-->
+<!--        {{ productDTO.description }}-->
+<!--        <h5 class="title-description">Đặc tả</h5>-->
+<!--        <table class="table table-bordered">-->
+<!--          <tr> <th colspan="2">Thông tin cơ bản</th> </tr>-->
+<!--          <tr> <td>Độ thuần chủng</td><td>{{ productDTO.thoroughbred?.purebredLevel }}%</td> </tr>-->
+<!--          <tr> <td>Loại</td><td>{{this.productDTO.category.categoryName}}</td> </tr>-->
+<!--          <tr> <td>Số lượng</td><td>{{this.productDTO.inventory}}</td> </tr>-->
+<!--&lt;!&ndash;          <tr> <td>Number of zones</td><td>2</td> </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr> <td>Automatic connection	</td> <td> <i class="fa fa-check text-success"></i> Yes </td></tr>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <tr> <th colspan="2">Dimensions</th> </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr> <td>Width</td><td>500mm</td> </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr> <td>Depth</td><td>400mm</td> </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr> <td>Height	</td><td>700mm</td> </tr>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <tr> <th colspan="2">Materials</th> </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr> <td>Exterior</td><td>Stainless steel</td> </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr> <td>Interior</td><td>Iron</td> </tr>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <tr> <th colspan="2">Connections</th> </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr> <td>Heating Type</td><td>Gas</td> </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr> <td>Connected load gas</td><td>15 Kw</td> </tr>&ndash;&gt;-->
+
+<!--        </table>-->
+<!--      </div> &lt;!&ndash; col.// &ndash;&gt;-->
+
+<!--      <aside class="col-md-4">-->
+
+<!--        <div class="box">-->
+
+<!--&lt;!&ndash;          <h5 class="title-description">Tin tức</h5>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>&ndash;&gt;-->
+<!--&lt;!&ndash;            Tổng hợp những tin tức bổ ích nhất , hữu ích nhất về các kiến thúc nuôi chó , mèo&ndash;&gt;-->
+<!--&lt;!&ndash;          </p>&ndash;&gt;-->
+
+<!--          <h5 class="title-description">Sản phẩm liên quan</h5>-->
+
+<!--          <ng-container *ngFor="let pet of productRelates; let i = index">-->
+<!--            <article class="media mb-3" >-->
+<!--              <a routerLink="/home/product-detail/{{pet.id}}"><img class="img-sm mr-3" [src]="pet.image"></a>-->
+<!--              <div class="media-body">-->
+<!--                <h6 class="mt-0"><a routerLink="/home/product-detail/{{pet.id}}">{{pet.productName}}</a></h6>-->
+<!--                &lt;!&ndash;              <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin </p>&ndash;&gt;-->
+<!--              </div>-->
+
+<!--            </article>-->
+<!--          </ng-container>-->
+
+
+<!--&lt;!&ndash;          <article class="media mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#"><img class="img-sm mr-3" src="images/posts/2.jpg"></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="media-body">&ndash;&gt;-->
+<!--&lt;!&ndash;              <h6 class="mt-0"><a href="#">New tips and tricks</a></h6>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;              <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin </p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </article>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <article class="media mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#"><img class="img-sm mr-3" src="images/posts/1.jpg"></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="media-body">&ndash;&gt;-->
+<!--&lt;!&ndash;              <h6 class="mt-0"><a href="#">New tips and tricks</a></h6>&ndash;&gt;-->
+<!--&lt;!&ndash;              <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin </p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </article>&ndash;&gt;-->
+
+
+<!--        </div> &lt;!&ndash; box.// &ndash;&gt;-->
+<!--      </aside> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--    </div> &lt;!&ndash; row.// &ndash;&gt;-->
+
+<!--  </div> &lt;!&ndash; container .//  &ndash;&gt;-->
+<!--</section>-->
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+<!-- ========================= SECTION SUBSCRIBE  ========================= -->
+<!--<section class="padding-y-lg bg-light border-top">-->
+<!--  <div class="container">-->
+
+<!--    <p class="pb-2 text-center">Delivering the latest product trends and industry news straight to your inbox</p>-->
+
+<!--    <div class="row justify-content-md-center">-->
+<!--      <div class="col-lg-4 col-sm-6">-->
+<!--        <form class="form-row">-->
+<!--          <div class="col-8">-->
+<!--            <input class="form-control" placeholder="Your Email" type="email">-->
+<!--          </div> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--          <div class="col-4">-->
+<!--            <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Subscribe </button>-->
+<!--          </div> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--        </form>-->
+<!--        <small class="form-text">We’ll never share your email address with a third-party. </small>-->
+<!--      </div> &lt;!&ndash; col-md-6.// &ndash;&gt;-->
+<!--    </div>-->
+
+
+<!--  </div>-->
+<!--</section>-->
+<!-- ========================= SECTION SUBSCRIBE END// ========================= -->

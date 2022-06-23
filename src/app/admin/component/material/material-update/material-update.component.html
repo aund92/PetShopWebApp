@@ -1,0 +1,28 @@
+<div class="row justify-content-center mt-2">
+  <div class="col-8">
+    <h3 style="color: grey;">CẬP NHẬT NGUYÊN LIỆU</h3>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+      <div class="mb-3">
+        <label for="materialName" class="form-label">Tên nguyên liệu</label>
+        <input type="text" class="form-control" placeholder="Nhập Tên nguyên liệu" formControlName="materialName" [ngClass]="{ 'is-invalid': submitted && f.materialName.errors}">
+
+        <div *ngIf="submitted && f.materialName.invalid" class="invalid-feedback">
+          <div *ngIf="f.materialName.errors?.required">Bạn chưa nhập tên danh mục</div>
+          <div *ngIf="f.materialName.errors?.maxlength">Tên danh mục phải nhỏ hơn 50 ký tự</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Số lượng</label>
+        <input type="number" class="form-control" placeholder="Nhập số lượng" formControlName="quantity" [ngClass]="{ 'is-invalid': submitted && f.quantity.errors}">
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Lãi trên 1 bộ nguyên liệu</label>
+        <input type="number" class="form-control" placeholder="Nhập giá" formControlName="price" [ngClass]="{ 'is-invalid': submitted && f.price.errors}">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Lưu</button>
+      <button type="button" class="btn btn-secondary ms-2 ml-1" (click)="onBack()">Quay lại</button>
+    </form>
+  </div>
+</div>

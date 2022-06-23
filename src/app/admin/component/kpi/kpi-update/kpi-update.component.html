@@ -1,0 +1,44 @@
+<div class="row justify-content-center mt-2">
+  <div class="col-8">
+    <h3 style="color: grey;">CHỈNH SỬA KPI</h3>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+      <div class="mb-3">
+        <label for="materialId" class="form-label">Bộ nguyên liệu</label>
+        <select class="form-select form-control" formControlName="materialId"
+                [ngClass]="{ 'is-invalid': submitted && f.materialId.errors}">
+          <option *ngFor="let category of materials" [ngValue]="category.id">{{ category.materialName }}</option>
+        </select>
+
+        <div *ngIf="submitted && f.materialId.invalid" class="invalid-feedback">
+          <div *ngIf="f.materialId.errors?.required">Bạn chưa chọn bộ nguyên liệu</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="materialName" class="form-label">KPI (Bộ)</label>
+        <input type="number" class="form-control" placeholder="Nhập Tên nguyên liệu" formControlName="quantityKpi" [ngClass]="{ 'is-invalid': submitted && f.quantityKpi.errors}">
+
+        <!--        <div *ngIf="submitted && f.quantityKpi.invalid" class="invalid-feedback">-->
+        <!--          <div *ngIf="f.materialName.errors?.required">Bạn chưa nhập tên danh mục</div>-->
+        <!--        </div>-->
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Tiền bonus/bộ</label>
+        <input type="number" class="form-control" placeholder="Nhập số lượng" formControlName="bonus" [ngClass]="{ 'is-invalid': submitted && f.bonus.errors}">
+
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Ngày bắt đầu</label>
+        <input type="date" class="form-control" placeholder="Nhập số lượng" formControlName="startDate" [ngClass]="{ 'is-invalid': submitted && f.startDate.errors}">
+
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Ngày kết thúc</label>
+        <input type="date" class="form-control" placeholder="Nhập số lượng" formControlName="endDate" [ngClass]="{ 'is-invalid': submitted && f.endDate.errors}">
+
+      </div>
+      <button type="submit" class="btn btn-primary">Lưu</button>
+      <button type="button" class="btn btn-secondary ms-2 ml-1" (click)="onBack()">Quay lại</button>
+    </form>
+  </div>
+</div>

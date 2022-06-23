@@ -1,0 +1,208 @@
+<!-- Hero Section Begin -->
+<section class="hero" [ngClass]="{'hero-normal': teaser_1 }" >
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="hero__categories" (click)="teaser_1=!teaser_1">
+          <div class="hero__categories__all">
+            <i class="fa fa-bars"></i>
+            <span>Tất cả danh mục</span>
+          </div>
+          <ul>
+            <ng-container *ngFor="let category of categories; let i = index">
+              <li *ngIf="i <= 8"><a routerLink="/home/product-list/{{category.id}}">{{ category.categoryName}}</a></li>
+            </ng-container>
+
+            <!--            <li><a href="#">Vegetables</a></li>-->
+            <!--            <li><a href="#">Fruit & Nut Gifts</a></li>-->
+            <!--            <li><a href="#">Fresh Berries</a></li>-->
+            <!--            <li><a href="#">Ocean Foods</a></li>-->
+            <!--            <li><a href="#">Butter & Eggs</a></li>-->
+            <!--            <li><a href="#">Fastfood</a></li>-->
+            <!--            <li><a href="#">Fresh Onion</a></li>-->
+            <!--            <li><a href="#">Papayaya & Crisps</a></li>-->
+            <!--            <li><a href="#">Oatmeal</a></li>-->
+            <!--            <li><a href="#">Fresh Bananas</a></li>-->
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="hero__search">
+          <div class="hero__search__form">
+            <form action="#">
+              <input id="name" type="text" [formControl]="searchName2" placeholder="Bạn muốn tìm gì">
+              <button type="button" class="site-btn" (click)="findByName()">Search</button>
+            </form>
+          </div>
+          <div class="hero__search__phone">
+            <div class="hero__search__phone__icon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <div class="hero__search__phone__text">
+              <h5>0938231198</h5>
+              <span>Hỗ trợ 24/7</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" style="background-image: url('../assets/new/img/breadcrumb.jpg');" data-setbg="img/breadcrumb.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>Danh sách sản phẩm</h2>
+          <div class="breadcrumb__option">
+            <span>Cửa hàng</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Product Section Begin -->
+<section class="product spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-5">
+        <div class="sidebar">
+          <div class="sidebar__item">
+            <h4>Danh mục</h4>
+            <ul>
+              <ng-container *ngFor="let category of categories; let i = index">
+                <li ><a routerLink="/home/product-list/{{category.id}}">{{ category.categoryName}}</a></li>
+              </ng-container>
+<!--              <li><a href="#">Fresh Meat</a></li>-->
+<!--              <li><a href="#">Vegetables</a></li>-->
+<!--              <li><a href="#">Fruit & Nut Gifts</a></li>-->
+<!--              <li><a href="#">Fresh Berries</a></li>-->
+<!--              <li><a href="#">Ocean Foods</a></li>-->
+<!--              <li><a href="#">Butter & Eggs</a></li>-->
+<!--              <li><a href="#">Fastfood</a></li>-->
+<!--              <li><a href="#">Fresh Onion</a></li>-->
+<!--              <li><a href="#">Papayaya & Crisps</a></li>-->
+<!--              <li><a href="#">Oatmeal</a></li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-7">
+
+        <div class="filter__item">
+          <div class="row">
+            <div class="col-lg-4 col-md-5">
+              <div class="filter__sort">
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="filter__found">
+                <h6> Tìm thấy <span>{{this.products?.length}}</span> Sản phẩm</h6>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-3">
+              <div class="filter__option">
+                <span class="icon_grid-2x2"></span>
+                <span class="icon_ul"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="products && products.length > 0">
+          <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let product of products">
+            <div class="product__item">
+              <div class="product__item__pic set-bg" [style.background-image]="'url(' + product.image + ')'" style="border-radius: 10px;" data-setbg="img/product/product-1.jpg">
+                <ul class="product__item__pic__hover">
+<!--                  <li><a href="#"><i class="fa fa-heart"></i></a></li>-->
+<!--                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
+                  <li><a (click)="addToCart(product)" ><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
+              </div>
+              <div class="product__item__text">
+                <h6><a routerLink="/home/product-detail/{{product.id}}">{{product.productName}}</a></h6>
+                <h5>{{ product.priceSell! - (product.priceSell! * (product.sale! / 100)) | currency: 'VND':''}}đ</h5>
+              </div>
+            </div>
+          </div>
+
+        </div>
+<!--        <div class="product__pagination">-->
+<!--          <a href="#">1</a>-->
+<!--          <a href="#">2</a>-->
+<!--          <a href="#">3</a>-->
+<!--          <a href="#"><i class="fa fa-long-arrow-right"></i></a>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Product Section End -->
+
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<!--<section class="section-content padding-y">-->
+<!--  <div class="container">-->
+
+
+<!--    <header class="mb-3">-->
+<!--      <div class="form-inline">-->
+<!--        <strong class="mr-md-auto">Tìm thấy {{this.products?.length}} Sản phẩm </strong>-->
+
+<!--      </div>-->
+<!--    </header>&lt;!&ndash; sect-heading &ndash;&gt;-->
+
+<!--    <div class="row" *ngIf="products && products.length > 0">-->
+<!--      <div class="col-md-3" *ngFor="let product of products">-->
+<!--        <figure class="card card-product-grid">-->
+<!--          <div class="img-wrap">-->
+<!--            <span class="badge badge-danger">  </span>-->
+<!--            <img [src]="product.image" style="width: 100%; height: 100%;">-->
+<!--          </div> &lt;!&ndash; img-wrap.// &ndash;&gt;-->
+<!--          <figcaption class="info-wrap">-->
+<!--            <a routerLink="/home/product-detail/{{product.id}}" class="title mb-2">{{product.productName}}</a>-->
+<!--            <div class="price-wrap">-->
+<!--&lt;!&ndash;              <span class="price">{{ product.priceSell | currency: 'VND':''}}đ</span>&ndash;&gt;-->
+<!--              <ng-container *ngIf="product.sale">-->
+<!--                <span class="price">{{ product.priceSell! - (product.priceSell! * (product.sale! / 100)) | currency: 'VND':''}}đ</span>-->
+<!--                <del class="price-old">{{ product.priceSell | currency: 'VND':''}}đ</del>-->
+<!--              </ng-container>-->
+<!--              <ng-container *ngIf="!product.sale">-->
+<!--&lt;!&ndash;                <span class="price">{{ product.priceSell! - (product.priceSell! * (product.sale! / 100)) | currency: 'VND':''}}đ</span>&ndash;&gt;-->
+<!--                <span class="price">{{ product.priceSell | currency: 'VND':''}}đ</span>-->
+<!--              </ng-container>-->
+<!--              <small class="text-muted">/1 sản phẩm</small>-->
+<!--            </div> &lt;!&ndash; price-wrap.// &ndash;&gt;-->
+
+<!--&lt;!&ndash;            <p class="mb-2"> 2 Pieces  <small class="text-muted">(Min Order)</small></p>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <p class="text-muted ">Guangzhou Yichuang Electronic Co</p>&ndash;&gt;-->
+
+<!--            <hr>-->
+
+<!--            <p class="mb-3">-->
+<!--              <span class="tag"> <i class="fa fa-tag"></i> {{ product.category?.categoryName}}</span>-->
+<!--&lt;!&ndash;              <span class="tag"> 2 Years </span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span class="tag"> 23 reviews </span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span class="tag"> Việt Nam </span>&ndash;&gt;-->
+<!--            </p>-->
+
+
+<!--          </figcaption>-->
+<!--        </figure>-->
+<!--      </div> &lt;!&ndash; col.// &ndash;&gt;-->
+
+<!--    </div> &lt;!&ndash; row end.// &ndash;&gt;-->
+
+
+<!--  </div> &lt;!&ndash; container .//  &ndash;&gt;-->
+<!--</section>-->
+<!-- ========================= SECTION CONTENT END// ========================= -->

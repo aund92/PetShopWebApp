@@ -1,0 +1,25 @@
+<div class="row justify-content-center mt-2">
+    <div class="col-8">
+        <h3 style="color: grey;">Chỉnh sửa kích cỡ</h3>
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+            <div class="mb-3" [hidden]="true">
+                <input type="text" class="form-control" placeholder="Nhập Size" formControlName="id" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="purebredLevel" class="form-label">Size</label>
+                <input type="number" class="form-control" placeholder="Nhập Size" formControlName="purebredLevel" [ngClass]="{ 'is-invalid': submitted && f.purebredLevel.errors}">
+
+                <div *ngIf="submitted && f.purebredLevel.invalid" class="invalid-feedback">
+                    <div *ngIf="f.purebredLevel.errors?.required">Bạn chưa nhập size</div>
+                    <div *ngIf="f.purebredLevel.errors?.maxlength">Size phải nhỏ hơn hoặc bằng 3 ký tự</div>
+                    <div *ngIf="f.purebredLevel.errors?.min">Phải nhập số trong khoản từ 1 đến 100</div>
+                    <div *ngIf="f.purebredLevel.errors?.max">Phải nhập số trong khoản từ 1 đến 100</div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <button type="button" class="btn btn-secondary ms-2 ml-1" (click)="onBack()">Quay lại</button>
+        </form>
+    </div>
+</div>

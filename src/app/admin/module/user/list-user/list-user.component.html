@@ -1,0 +1,55 @@
+<div class="row mt-2" style="justify-content: center;">
+    <h3 style="color: grey;">Quản lý người dùng</h3>
+    </div>
+
+
+    <div class="alert alert-warning" role="alert" *ngIf="userSystems && userSystems.length === 0">
+        Không có dữ liệu người dùng
+    </div>
+
+    <div class="table-responsive lb-table lb-scroll mt-2" *ngIf="userSystems && userSystems.length > 0">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Email</th>
+                    <th>Ngày tạo/sửa</th>
+                    <th>Quyền</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let userSystem of userSystems">
+                    <td>{{ userSystem.email }}</td> 
+                    <td>{{ userSystem.lastUpdate | date:'dd-MM-yyyy' }}</td>
+                    <td>
+                        <div *ngFor="let role of userSystem.roles">
+                            {{ role.name }}
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info" routerLink="/home-admin/update-user/{{ userSystem.id }}">Sửa</button>
+                        <button type="button" class="btn btn-danger ms-2 ml-1" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="delete(userSystem.id)" [disabled]="email === userSystem.email">Xóa</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa người dùng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xóa không ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" (click)="confirmDelete()" data-bs-dismiss="modal">Xóa</button>
+                </div>
+            </div>
+        </div>
+</div>

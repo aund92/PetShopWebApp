@@ -1,0 +1,56 @@
+<div class="mt-4 row" style="justify-content: center;">
+  <h3 style="color: grey;" >Quản lý thu nhập</h3>
+</div>
+<div class="row mt-5" style="justify-content: space-around;">
+    <div class="mb-3">
+        <label for="startDate" class="form-label">Ngày bắt đầu</label>
+        <input class="ml-2" type="date" [(ngModel)]="startDate" >
+        <div style="margin-left: 6rem;">
+            <small class="text-danger" *ngIf="isShowErrorStartDate">Vui lòng nhập ngày bắt đầu</small>
+        </div>    
+    </div>
+      <div class="mb-3">
+        <label for="endDate" class="form-label">Ngày kết thúc</label>
+        <input  class="ml-2" type="date" [(ngModel)]="endDate" >
+        <div style="margin-left: 6rem;">
+            <small class="text-danger" *ngIf="isShowErrorEndDate">Vui lòng nhập ngày kết thúc</small>
+        </div>
+      </div>
+      <div class="mb-3">
+      <button type="submit" class="btn btn-primary" (click)="searchCommand()">Tìm kiếm</button>
+    </div>
+</div>
+<div class="row justify-content-center mt-2">
+    <div class="card mt-2" style="width: 60rem;">
+      <div class="card-body">
+        <p>Danh sách nguyên liệu</p>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Tên nguyên liệu</th>
+            <th scope="col">Lãi</th>
+            <th scope="col">Tiền Bonus</th>
+            <th scope="col">Tổng tiền</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of incomes">
+            <td>{{item.name}}</td>
+            <td>{{item.interest | currency: 'VND':''}}đ</td>
+            <td>{{item.bonus | currency: 'VND':''}} đ</td>
+            <td>{{item.total|currency: 'VND':'' }} đ</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td>Tổng doanh thu: </td>
+            <td><cite title="Source Title">{{totalIncome | currency: 'VND':''}} đ</cite></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+    <div class="alert alert-danger mt-2" *ngIf="isShowNotFound">
+      Không có dữ liệu từ ngày {{startDateShowError|date:'dd-MM-yyyy'}} cho tới ngày {{endDateShowError|date:'dd-MM-yyyy'}}
+    </div>
+  </div>

@@ -1,0 +1,57 @@
+<div class="mt-4 row" style="justify-content: center;">
+  <h3 style="color: grey;" >Quản lý KPI</h3>
+</div>
+<div class="row col-sm-12 mt-2">
+    <a class="btn btn-primary" routerLink="/home-admin/kpi-add">Thêm mới</a>
+
+    <div class="alert alert-warning" role="alert" *ngIf="materials && materials.length === 0">
+      Không có dữ liệu danh mục sản phẩm
+    </div>
+
+    <div class="table-responsive lb-table lb-scroll mt-2" *ngIf="materials && materials.length > 0">
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Tên nguyên liệu</th>
+          <th>KPI(Bộ)</th>
+          <th>Tiền Bonus</th>
+          <th>Ngày bắt đầu</th>
+          <th>Ngày kết thúc</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of materials">
+          <td>{{ item.material?.materialName }}</td>
+          <td>{{ item.quantityKpi }}</td>
+          <td>{{ item.bonus }}</td>
+          <td>{{ item.startDate| date:'dd-MM-yyyy'}}</td>
+          <td>{{ item.endDate|date:'dd-MM-yyyy' }}</td>
+          <td class="row">
+            <button type="button" class="btn btn-info" routerLink="/home-admin/kpi-update/{{ item.id }}">Sửa</button>
+            <button type="button" class="btn btn-danger ms-2 ml-2 mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="delete(item.id)">Xóa</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal -->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Bạn có chắc chắn muốn xóa không ?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary" (click)="confirmDelete()" data-bs-dismiss="modal">Xóa</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+</div>

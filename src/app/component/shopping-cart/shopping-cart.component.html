@@ -1,0 +1,325 @@
+<!-- Hero Section Begin -->
+<section class="hero" [ngClass]="{'hero-normal': teaser_1 }" >
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="hero__categories" (click)="teaser_1=!teaser_1">
+          <div class="hero__categories__all" >
+            <i class="fa fa-bars"></i>
+            <span>Tất cả danh mục</span>
+          </div>
+          <ul>
+            <ng-container *ngFor="let category of categories; let i = index">
+              <li *ngIf="i <= 8"><a routerLink="/home/product-list/{{category.id}}">{{ category.categoryName}}</a></li>
+            </ng-container>
+
+            <!--            <li><a href="#">Vegetables</a></li>-->
+            <!--            <li><a href="#">Fruit & Nut Gifts</a></li>-->
+            <!--            <li><a href="#">Fresh Berries</a></li>-->
+            <!--            <li><a href="#">Ocean Foods</a></li>-->
+            <!--            <li><a href="#">Butter & Eggs</a></li>-->
+            <!--            <li><a href="#">Fastfood</a></li>-->
+            <!--            <li><a href="#">Fresh Onion</a></li>-->
+            <!--            <li><a href="#">Papayaya & Crisps</a></li>-->
+            <!--            <li><a href="#">Oatmeal</a></li>-->
+            <!--            <li><a href="#">Fresh Bananas</a></li>-->
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="hero__search">
+          <div class="hero__search__form">
+            <form action="#">
+              <input id="name" type="text" [formControl]="searchName" placeholder="Bạn muốn tìm gì">
+              <button type="button" class="site-btn" (click)="findByName()">Search</button>
+            </form>
+          </div>
+          <div class="hero__search__phone">
+            <div class="hero__search__phone__icon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <div class="hero__search__phone__text">
+              <h5>0938231198</h5>
+              <span>Hỗ trợ 24/7</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" style="background-image: url('../assets/new/img/breadcrumb.jpg');" data-setbg="img/breadcrumb.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>Giỏ hàng</h2>
+          <div class="breadcrumb__option">
+            <a href="./index.html">Trang chủ</a>
+            <span>Giỏ hàng</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shoping__cart__table">
+          <table>
+            <thead>
+            <tr>
+              <th class="shoping__product">Sản phẩm</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Tổng tiền</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of items">
+              <td class="shoping__cart__item">
+                <img width="70px" [src]="item.productDTO?.productImages?.length > 0 && item.productDTO?.productImages[0]?.image" alt="">
+                <h5>{{item.productDTO?.productName}}</h5>
+              </td>
+              <td class="shoping__cart__price">
+                {{ item.productDTO?.priceSell | currency: 'VND':'' }}
+              </td>
+              <td class="shoping__cart__quantity">
+                <div class="quantity">
+                  <div class="pro-qty">
+                    <input type="text" value="{{item.quantity}}" disabled>
+                  </div>
+                </div>
+              </td>
+              <td class="shoping__cart__total">
+                {{ item?.productDTO.priceSell  * item.quantity | currency: 'VND':'' }}đ
+              </td>
+              <td class="shoping__cart__item__close">
+                <span class="icon_close" (click)="onRemove(item.productId)">x</span>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shoping__cart__btns">
+          <a routerLink="/home/product-list" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
+<!--          <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>-->
+<!--            Upadate Cart</a>-->
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="shoping__continue">
+          <div class="shoping__discount">
+<!--            <h5>Discount Codes</h5>-->
+<!--            <form action="#">-->
+<!--              <input type="text" placeholder="Enter your coupon code">-->
+<!--              <button type="submit" class="site-btn">APPLY COUPON</button>-->
+<!--            </form>-->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="shoping__checkout">
+          <h5>Cart Total</h5>
+          <ul>
+<!--            <li>Subtotal <span>$454.98</span></li>-->
+            <li>Total <span>{{total | currency: 'VND':''}}</span></li>
+          </ul>
+          <a (click)="onPayment()" class="primary-btn">Tiến hành thanh toán</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Shoping Cart Section End -->
+
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<!--<section class="section-content padding-y">-->
+<!--  <div class="container">-->
+
+<!--    <div class="row">-->
+<!--      <main class="col-md-9">-->
+<!--        <div class="card">-->
+
+<!--          <table class="table table-borderless table-shopping-cart">-->
+<!--            <thead class="text-muted">-->
+<!--            <tr class="small text-uppercase">-->
+<!--              <th scope="col">Product</th>-->
+<!--              <th scope="col" width="120">Quantity</th>-->
+<!--              <th scope="col" width="120">Price</th>-->
+<!--              <th scope="col" class="text-right" width="200"> </th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr *ngFor="let item of items">-->
+<!--              <td>-->
+<!--                <figure class="itemside">-->
+<!--                  <div class="aside"><img [src]="item.productDTO?.productImages?.length > 0 && item.productDTO?.productImages[0]?.image" class="img-sm"></div>-->
+<!--                  <figcaption class="info">-->
+<!--                    <a href="#" class="title text-dark">{{item.productDTO?.productName}}</a>-->
+<!--                    <p class="text-muted small">Loại: {{item.productDTO?.category?.categoryName}}</p>-->
+<!--                  </figcaption>-->
+<!--                </figure>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <input  class="form-control" type="text" value="{{item.quantity}}" disabled>-->
+<!--&lt;!&ndash;                <select class="form-control">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>1</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>2</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>3</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>4</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <div class="price-wrap">-->
+<!--                  <var class="price">{{ item?.productDTO.priceSell  * item.quantity | currency: 'VND':'' }}đ</var>-->
+<!--                  <small class="text-muted"> {{ item.productDTO?.priceSell | currency: 'VND':'' }}đ each </small>-->
+<!--                </div> &lt;!&ndash; price-wrap .// &ndash;&gt;-->
+<!--              </td>-->
+<!--              <td class="text-right">-->
+<!--&lt;!&ndash;                <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>&ndash;&gt;-->
+<!--                <a  class="btn btn-light" (click)="onRemove(item.productId)"> Xóa</a>-->
+<!--              </td>-->
+<!--            </tr>-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <figure class="itemside">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="aside"><img src="images/items/2.jpg" class="img-sm"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <figcaption class="info">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="#" class="title text-dark">Product name  goes here nice</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <p class="text-muted small">Size: XL, Color: blue, <br> Brand: Gucci</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </figcaption>&ndash;&gt;-->
+<!--&lt;!&ndash;                </figure>&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <select class="form-control">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>1</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>2</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>3</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>4</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="price-wrap">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <var class="price">$149.97</var>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <small  class="text-muted"> $75.00 each </small>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div> &lt;!&ndash; price-wrap .// &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="text-right">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="" class="btn btn-light btn-round"> Remove</a>&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <figure class="itemside">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="aside"><img src="images/items/3.jpg" class="img-sm"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <figcaption class="info">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="#" class="title text-dark">Another name of some product goes just here as a demo text </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <p class="small text-muted">Size: XL, Color: blue,  Brand: Tissot</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </figcaption>&ndash;&gt;-->
+<!--&lt;!&ndash;                </figure>&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <select class="form-control">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>1</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>2</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <option>3</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="price-wrap">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <var class="price">$98.00</var>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <small class="text-muted"> $578.00 each</small>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div> &lt;!&ndash; price-wrap .// &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="text-right">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a href="" class="btn btn-light btn-round"> Remove</a>&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--            </tbody>-->
+<!--          </table>-->
+
+<!--          <div class="card-body border-top">-->
+<!--            <a class="btn btn-primary float-md-right" (click)="onPayment()" style="cursor: pointer"> Thanh toán <i class="fa fa-chevron-right"></i> </a>-->
+<!--            <a routerLink="/home/product-list" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a>-->
+<!--          </div>-->
+<!--        </div> &lt;!&ndash; card.// &ndash;&gt;-->
+
+<!--        <div class="alert alert-success mt-3">-->
+<!--          <p class="icontext"><i class="icon text-success fa fa-truck"></i> Thời gian giao hàng dự kiến 1-2 tuần</p>-->
+<!--        </div>-->
+
+<!--      </main> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--      <aside class="col-md-3">-->
+<!--&lt;!&ndash;        <div class="card mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="card-body">&ndash;&gt;-->
+<!--&lt;!&ndash;            <form>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Have coupon?</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="input-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <input type="text" class="form-control" name="" placeholder="Coupon code">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span class="input-group-append">&ndash;&gt;-->
+<!--&lt;!&ndash;							<button class="btn btn-primary">Apply</button>&ndash;&gt;-->
+<!--&lt;!&ndash;						</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </form>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div> &lt;!&ndash; card-body.// &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>  &lt;!&ndash; card .// &ndash;&gt;&ndash;&gt;-->
+<!--        <div class="card">-->
+<!--          <div class="card-body">-->
+<!--&lt;!&ndash;            <dl class="dlist-align">&ndash;&gt;-->
+<!--&lt;!&ndash;              <dt>Total price:</dt>&ndash;&gt;-->
+<!--&lt;!&ndash;              <dd class="text-right">USD 568</dd>&ndash;&gt;-->
+<!--&lt;!&ndash;            </dl>&ndash;&gt;-->
+<!--&lt;!&ndash;            <dl class="dlist-align">&ndash;&gt;-->
+<!--&lt;!&ndash;              <dt>Discount:</dt>&ndash;&gt;-->
+<!--&lt;!&ndash;              <dd class="text-right">USD 658</dd>&ndash;&gt;-->
+<!--&lt;!&ndash;            </dl>&ndash;&gt;-->
+<!--            <dl class="dlist-align">-->
+<!--              <dt>Tổng tiền:</dt>-->
+<!--              <dd class="text-right  h5"><strong>{{total | currency: 'VND':''}}</strong></dd>-->
+<!--            </dl>-->
+<!--            <hr>-->
+<!--            <p class="text-center mb-3">-->
+<!--              <img src="./assets/images/misc/payments.png" height="26">-->
+<!--            </p>-->
+
+<!--          </div> &lt;!&ndash; card-body.// &ndash;&gt;-->
+<!--        </div>  &lt;!&ndash; card .// &ndash;&gt;-->
+<!--      </aside> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--    </div>-->
+
+<!--  </div> &lt;!&ndash; container .//  &ndash;&gt;-->
+<!--</section>-->
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<!--<section class="section-name border-top padding-y">-->
+<!--  <div class="container">-->
+<!--    <h6>Thanh toán và chính sách đổi trả</h6>-->
+<!--    <p>Sau khi Quý Khách hàng đặt mua hàng tại PetShop, dựa vào các thông tin quý khách cung cấp, nhân viên của chúng tôi sẽ đến tận nơi giao hàng và Quý Khách thanh toán tiền ngay cho nhân viên giao hàng. Trong trường hợp Quý Khách muốn được giao hàng đến 1 địa chỉ khác, Quý Khách sẽ thanh toán trước với chúng tôi tại địa chỉ </p>-->
+<!--    <p>Nếu đồng ý đặt mua số lượng sản phẩm có trong giỏ hàng, Quý khách nhấn chọn nút "Thanh toán" bên dưới Giỏ Mua Hàng để chấp nhận thanh toán. Sau đó Quý khách cần đăng nhập tài khoản để điền các thông tin cần thiết để hoàn tất đơn đặt hàng.</p>-->
+
+<!--  </div>&lt;!&ndash; container // &ndash;&gt;-->
+<!--</section>-->
+<!-- ========================= SECTION  END// ========================= -->
